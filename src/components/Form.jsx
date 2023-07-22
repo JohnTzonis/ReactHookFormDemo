@@ -1,11 +1,10 @@
-import React from 'react';
 import { useForm } from 'react-hook-form';
+import { DevTool } from '@hookform/devtools';
 
 export const Form = () => {
     // returns an object
     const form = useForm()
-    const { register } = form
-    const { name, ref, onChange, onBlur } register("username")
+    const { register, control } = form
 
     return (
         <div>
@@ -14,21 +13,31 @@ export const Form = () => {
                 <input
                     type="text"
                     id="username"
-                    name={name}
-                    ref={ref}
-                    onChange={onChange}
-                    onBlur={onBlur}
+                    {...register("username")}
                     >
                 </input>
 
                 <label htmlFor="email">Email</label>
-                <input type="email" id="email" name="email"></input>
+                <input
+                    type="email"
+                    id="email"
+                    {...register("emain")}
+                    >
+                </input>
 
                 <label htmlFor="channel">Channel</label>
-                <input type="text" id="channel" name="channel"></input>
+                <input
+                    type="text"
+                    id="channel"
+                    {...register("channel")}
+                    >
+                </input>
 
                 <button>Submit</button>
             </form>
+            <DevTool control={control} />
+            {/* touched indicates if the field has been interacted
+            dirty indicates if the field has been changed */}
         </div>
     )
 }
